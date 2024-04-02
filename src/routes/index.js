@@ -1,11 +1,10 @@
 import { Router } from 'express';
-
-import * as homeController from '@/controllers/home';
+import homeRouter from '@/routes/home.route';
+import taskRouter from '@/routes/task.route';
 
 const router = Router();
 
-router.get('/', homeController.index);
-
-router.get('/health', homeController.healthCheck);
+router.use('/', homeRouter);
+router.use('/tasks', taskRouter);
 
 export default router;

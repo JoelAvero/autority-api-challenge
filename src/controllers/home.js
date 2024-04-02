@@ -4,13 +4,18 @@ import db from '@/database';
  * GET /
  * Home page
  */
-export const index = (req, res) => res.send('Hello World!');
+const index = (req, res) => res.send('Hello World!');
 
 /**
  * GET /health
  * Health check
  */
-export const healthCheck = async (req, res) => {
-  const users = await db.models.user.findAll();
-  return res.json({ success: true, data: users });
+const healthCheck = async (req, res) => {
+  const todos = await db.models.todo.findAll();
+  return res.json({ success: true, data: todos });
+};
+
+export default {
+  index,
+  healthCheck,
 };
