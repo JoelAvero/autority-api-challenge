@@ -10,8 +10,8 @@ const getTaskById = async (id) => {
   return Todo.findByPk(id);
 };
 
-const createTask = async () => {
-  return 'create task';
+const createTask = async (task) => {
+  return Todo.create(task);
 };
 
 const updateTask = async (id) => {

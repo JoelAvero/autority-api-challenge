@@ -1,5 +1,6 @@
 import { asyncHandler, response } from '@/helpers/index';
 import taskService from '@/services/task.service';
+import { CREATED } from '@/helpers/constants';
 
 /**
  * GET /tasks
@@ -25,8 +26,10 @@ const getTaskById = async (req, res) => {
  * Create task
  */
 const createTask = async (req, res) => {
-  await taskService.createTask();
-  response(res, 'task created');
+  const task = req.body;
+  const newTask = await taskService.createTask(task);
+
+  response(res, newTask, CREATED);
 };
 
 /*

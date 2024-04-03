@@ -4,11 +4,10 @@ import cors from 'cors';
 import logger from 'morgan';
 import express from 'express';
 import compression from 'compression';
-import createError from 'http-errors';
 import cookieParser from 'cookie-parser';
 
 import * as configs from '@/config';
-import { errorResponse } from './helpers';
+import { errorHandler, notFound } from '@/middlewares';
 
 const app = express();
 
@@ -24,14 +23,9 @@ app.use(cookieParser());
 configs.routerConfig(app);
 
 // catch 404 and forward to error handler
-app.use((req, res, next) => {
-  next(createError(404));
-});
+app.use(notFound);
 
 // error handler
-// eslint-disable-next-line no-unused-vars
-app.use((err, req, res, next) => {
-  errorResponse(res, err.message, err.statusCode);
-});
+app.use(errorHandler);
 
 export default app;
