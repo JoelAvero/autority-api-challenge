@@ -1,4 +1,4 @@
-import homeController from '@/controllers/home';
+import homeController from '@/controllers/home.controller';
 
 const { Router } = require('express');
 
