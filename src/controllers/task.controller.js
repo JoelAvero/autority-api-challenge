@@ -36,7 +36,6 @@ const createTask = async (req, res) => {
  * PUT /tasks/:id
  * Update task
  */
-// TODO: review me
 const updateTask = async (req, res) => {
   const updatedTask = req.body;
   const { id } = req.params;
