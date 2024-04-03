@@ -20,12 +20,19 @@ const createTask = async (task) => {
   return taskRepository.createTask(task);
 };
 
-const updateTask = async (id) => {
-  return taskRepository.updateTask(id);
+const updateTask = async (id, updatedTask) => {
+  const [updatedTasks] = await taskRepository.updateTask(id, updatedTask);
+
+  if (updatedTasks === 0) {
+    throw createError(NOT_FOUND, 'Task not found');
+  }
 };
 
 const deleteTask = async (id) => {
-  return taskRepository.deleteTask(id);
+  const deletedTask = await taskRepository.deleteTask(id);
+  if (deletedTask === 0) {
+    throw createError(NOT_FOUND, 'Task not found');
+  }
 };
 
 export default {

@@ -38,9 +38,11 @@ const createTask = async (req, res) => {
  */
 // TODO: review me
 const updateTask = async (req, res) => {
+  const updatedTask = req.body;
   const { id } = req.params;
-  const task = await taskService.updateTask(id);
-  response(res, task);
+  await taskService.updateTask(id, updatedTask);
+
+  response(res, 'task updated');
 };
 
 /*
@@ -50,6 +52,7 @@ const updateTask = async (req, res) => {
 const deleteTask = async (req, res) => {
   const { id } = req.params;
   await taskService.deleteTask(id);
+
   response(res, 'task deleted');
 };
 

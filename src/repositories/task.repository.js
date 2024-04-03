@@ -14,12 +14,12 @@ const createTask = async (task) => {
   return Todo.create(task);
 };
 
-const updateTask = async (id) => {
-  return `update task ${id}`;
+const updateTask = async (id, updatedTask) => {
+  return Todo.update(updatedTask, { where: { id } });
 };
 
 const deleteTask = async (id) => {
-  return `delete task ${id}`;
+  return Todo.destroy({ where: { id } });
 };
 
 export default {
