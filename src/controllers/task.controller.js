@@ -51,7 +51,7 @@ const deleteTask = async (req, res) => {
 };
 
 export default {
-  getTasks,
+  getTasks: asyncHandler(getTasks),
   getTaskById: asyncHandler(getTaskById),
   createTask: asyncHandler(createTask),
   updateTask: asyncHandler(updateTask),

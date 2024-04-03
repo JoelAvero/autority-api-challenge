@@ -8,6 +8,7 @@ import createError from 'http-errors';
 import cookieParser from 'cookie-parser';
 
 import * as configs from '@/config';
+import { errorResponse } from './helpers';
 
 const app = express();
 
@@ -30,7 +31,7 @@ app.use((req, res, next) => {
 // error handler
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
-  res.status(err.status || 500).json(err);
+  errorResponse(res, err.message, err.statusCode);
 });
 
 export default app;

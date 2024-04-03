@@ -1,18 +1,21 @@
-import db from '@/database';
+import { response } from '../helpers';
+import taskService from '../services/task.service';
 
 /**
  * GET /
  * Home page
  */
-const index = (req, res) => res.send('Hello World!');
+const index = (req, res) => {
+  response(res, 'Hello World');
+};
 
 /**
  * GET /health
  * Health check
  */
 const healthCheck = async (req, res) => {
-  const todos = await db.models.todo.findAll();
-  return res.json({ success: true, data: todos });
+  const tasks = await taskService.getTasks();
+  response(res, tasks);
 };
 
 export default {

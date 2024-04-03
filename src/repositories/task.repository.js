@@ -1,9 +1,13 @@
+import db from '@/database/index';
+
+const { Todo } = db.models;
+
 const getTasks = async () => {
-  return 'all tasks repo';
+  return Todo.findAll();
 };
 
 const getTaskById = async (id) => {
-  return `get task ${id}`;
+  return Todo.findByPk(id);
 };
 
 const createTask = async () => {

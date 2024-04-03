@@ -2,6 +2,7 @@ import { Sequelize } from 'sequelize';
 import fs from 'fs';
 import path from 'path';
 import * as config from '@/config/sequelize';
+
 // Configuration
 const env = process.env.NODE_ENV;
 const sequelizeConfig = config[env];
@@ -20,7 +21,15 @@ fs.readdirSync(path.join(__dirname, '/models'))
     modelDefiners.push(require(path.join(__dirname, '/models', file)));
   });
 
+// Inject sequelize instance to models
 modelDefiners.forEach((model) => model.default(sequelize));
+
+// Capitalize model names
+const entries = Object.entries(sequelize.models);
+const capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]]);
+
+// reassign capitalized models
+sequelize.models = Object.fromEntries(capsEntries);
 
 // Associations
 Object.keys(sequelize.models).forEach((modelName) => {
